@@ -1,0 +1,63 @@
+/* Shared decorative background for Focus and Spotlight (29 September light experiment,
+   promoted to default). Prototype Hub light tokens: cool pale-blue base, clean lilac and
+   powder-pink light (less grey mixing than the original coral), 120px blur. Surfaces above it keep their own Figma fills. */
+:root {
+  --focus-bg-base: #f4f6fa;
+  --focus-glow-violet: #b0a4ff;
+  --focus-glow-pink: #ff76ad;
+  --focus-glow-opacity: .56;
+}
+.focus-ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--focus-bg-base);
+}
+/* Fit the full 740px Hub canvas into the 488px upper area.
+   Scale after the light's rotation/blur so its complete falloff stays visible. */
+.focus-ambient-scene {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 740px;
+  transform: scaleY(.65946);
+  transform-origin: top center;
+  pointer-events: none;
+}
+.focus-ambient-light {
+  position: absolute;
+  left: 62%;
+  top: 28%;
+  width: 520px;
+  height: 600px;
+  border-radius: 100%;
+  background: linear-gradient(0deg, var(--focus-glow-violet) 34.762%, #ff141800 100%),
+    linear-gradient(90deg, var(--focus-glow-pink), var(--focus-glow-pink));
+  filter: blur(120px) saturate(.9);
+  opacity: var(--focus-glow-opacity);
+  transform: translate3d(-50%,-50%,0) rotate(60deg);
+  pointer-events: none;
+}
+/* Focus only: the raised sheet finishes in a solid white header. */
+.modal > .focus-ambient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: var(--ambient-dock, 0);
+  pointer-events: none;
+}
+/* Spotlight dialog: the assistant conversation owns a full-surface light (glowBounds =
+   whole dialog, fixed behind the scrolling transcript). This includes the inline
+   New Thread over Focus. Contact chats keep the white Figma sheet. */
+.chat-view > .focus-ambient { display: block; }
+.chat-view.is-contact > .focus-ambient { display: none; }
+/* Leave rendering once the dialog has finished its exit, not during it. */
+.chat-view:not(.is-active) > .focus-ambient {
+  display: none;
+  transition: display 0s .46s;
+  transition-behavior: allow-discrete;
+}
+.chat-view > .focus-ambient .focus-ambient-scene { height: calc(100% / .65946); }
+.chat-view > .focus-ambient .focus-ambient-light { top: 50%; }

@@ -1,0 +1,65 @@
+/* Opt-in responsive research surface. Typography and controls stay at native CSS sizes. */
+:root { color-scheme:light only; --research-height:100dvh; --research-offset:0px; --research-switch-height:0px; }
+html,body { width:100%; height:100%; background:#fff; overscroll-behavior:none; }
+:root[data-research] .stage-wrap { top:var(--research-offset); bottom:auto; height:var(--research-height); padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); display:block; }
+:root[data-research] .stage { position:relative; top:var(--research-switch-height); left:0; width:100%; height:calc(100% - var(--research-switch-height)); border-radius:0; box-shadow:none; transform:none!important; }
+:root[data-research] :is(.viewport,.sheet,.sheet-list) { width:100%; height:var(--embed-height,100%); }
+:root[data-research] :is(.upper,.stories,.chips,.seg,.list-inner,.content-pane,.input-haze) { width:100%; }
+:root[data-research] :is(.status-bar,.home-indicator,.ios-keyboard) { display:none!important; }
+:root[data-research] :is(.ctl--cross) { left:auto; right:16px; }
+:root[data-research] .ctl.nav-control { left:auto; right:70px; }
+:root[data-research] .page-input-dock .page-input,
+:root[data-research] #directoryView .hub-request-input { width:calc(100% - 40px); }
+:root[data-research] .page-input .field-text { width:calc(100% - 72px); }
+:root[data-research] .entry-tabbar { top:auto; bottom:12px; width:auto; left:12px; right:12px; }
+:root[data-research] .entry-search { width:calc(100% - 40px); }
+/* The source dashboard is a static bank screenshot, not a set of product components.
+   Crop its simulated system status bar; the interactive ECK surfaces below are fluid. */
+:root[data-research] .entry-scroll { padding-bottom:110px; }
+:root[data-research] .dashboard-render { position:relative; top:0; width:100%; height:auto; object-fit:contain; transform:translateY(-5.164319%); margin:0; }
+:root[data-research] .hub-dashboard-actions { left:66.6667%; width:33.3333%; }
+:root[data-research] .hub-proactive-card { bottom:90px; }
+:root[data-research] :is(textarea,input,select) { font-size:17px; }
+:root[data-research] .hub-call-sheet { max-height:calc(100% - 32px); bottom:8px; overflow-y:auto; }
+:root[data-research] :is(.hub-more-sheet,.hub-dialog-sheet,.event-popover) { max-height:calc(100% - 24px); overflow-y:auto; }
+:root[data-research] .chat-input { max-width:100%; }
+:root[data-research] .communication-actions { display:flex; justify-content:space-between; gap:8px; }
+:root[data-research] .communication-action { min-width:0; flex:1; }
+/* At short heights, keep the existing list accessible immediately below the navbar. */
+@media(max-height:600px) {
+ :root[data-research] .hub-call-sheet { max-height:calc(100% - 16px); }
+}
+:root[data-research] #chatView.has-manager-title .flow-header h1 small { max-width:100%; overflow:hidden; text-overflow:ellipsis; }
+:root[data-research] .hub-more-glass { max-width:calc(100% - 16px); max-height:calc(100% - 32px); overflow-y:auto; }
+:root[data-research] .hub-reminder-settings { max-height:calc(100% - 24px); overflow-y:auto; }
+@media(max-height:600px) {
+ :root[data-research] #chatView > .hub-statement-options.is-questionnaire .hub-task-card { overflow-y:auto; }
+ :root[data-research] #chatView > .hub-statement-options.is-questionnaire .hub-task-choices { flex-shrink:0; overflow:visible; }
+}
+
+:root[data-research] .viewport { overflow:clip; }
+:root[data-research] .entry-scroll { position:absolute; inset:0; overflow-x:hidden; overflow-y:auto; padding-bottom:110px; scrollbar-width:none; overscroll-behavior:contain; }
+:root[data-research] .entry-tabbar { z-index:3; }
+
+:root[data-research] .research-dashboard-art { width:100%; aspect-ratio:393 / 713; overflow:hidden; }
+:root[data-research] .hub-dashboard-profile { left:auto; right:16px; }
+:root[data-research] .entry-point { container-type:inline-size; }
+:root[data-research] .hub-dashboard-role { top:13.486cqw; left:19.338cqw; }
+:root[data-research] .hub-dashboard-actions { top:5.089cqw; height:16.794cqw; }
+:root[data-research] .entry-search { top:25.191cqw; }
+:root[data-research] .event-strip-clip { width:calc(100% + 20px); }
+:root[data-research] .greeting { width:calc(100% - 48px); }
+:root[data-research] .scrim { width:100%; }
+:root[data-research] .event-popover { max-width:calc(100% - 16px); }
+/* Desktop review keeps mobile line lengths; touch devices use their full viewport. */
+@media (min-width:601px) and (hover:hover) and (pointer:fine) {
+ :root[data-research] .stage-wrap { max-width:430px; margin-inline:auto; }
+}
+/* The target dock reserves 62px for the separate AI button and a 12px gap.
+   Override the source's fixed 279px navigation width on every research viewport. */
+:root[data-research][data-hub-update="3"][data-unified-tabbar="false"] .entry-tabbar {
+ left:12px;
+ right:86px;
+ width:auto;
+ bottom:12px;
+}
