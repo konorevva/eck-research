@@ -397,7 +397,7 @@
       updateKeyboardViewport();
       syncComposer();
     };
-    if (changingView || isContactChat() || chatView.classList.contains('has-task-questionnaire')) change(); else morphComposer(change,KEYBOARD_DURATION);
+    if (window.SpotlightResearch?.keyboard || changingView || isContactChat() || chatView.classList.contains('has-task-questionnaire')) change(); else morphComposer(change,KEYBOARD_DURATION);
     cancelAnimationFrame(keyboardFrame);
     var start=performance.now();
     function follow(now) {
