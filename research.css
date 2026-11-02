@@ -145,3 +145,17 @@ html,body { width:100%; height:100%; background:#fff; overscroll-behavior:none; 
 :root[data-research] .stage.is-manual-chat #assistantComposer {
  background:#fff;
 }
+
+/* Center the greeting and quick actions as one group in the remaining space.
+   Auto margins collapse to zero when the group needs scrolling, keeping its
+   first line reachable rather than centering overflow above the scroll origin. */
+:root[data-research][data-research-keyboard="true"] .stage.is-manual-chat:not(.is-conversation) .upper {
+ display:flex; flex-direction:column;
+ padding-block:min(12px,calc(var(--research-intro-height) / 2));
+}
+:root[data-research][data-research-keyboard="true"] .stage.is-manual-chat:not(.is-conversation) .upper > .greeting {
+ flex:0 0 auto; margin-top:auto;
+}
+:root[data-research][data-research-keyboard="true"] .stage.is-manual-chat:not(.is-conversation) .upper > .chips {
+ flex:0 0 auto; margin-bottom:auto;
+}
