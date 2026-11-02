@@ -129,5 +129,19 @@ html,body { width:100%; height:100%; background:#fff; overscroll-behavior:none; 
 :root[data-research] .research-input-preview[hidden] { display:none; }
 :root[data-research] .research-input-caret { display:inline-block; width:0; height:1.1em; border-left:2px solid #1677ff; vertical-align:text-bottom; }
 :root[data-research] .research-input-placeholder { color:#b7b8c2; }
-:root[data-research] .research-input-active { color:transparent!important; -webkit-text-fill-color:transparent!important; }
-:root[data-research] .research-input-active::placeholder { color:transparent!important; }
+:root[data-research] .research-input-active { color:var(--text-primary,#111)!important; -webkit-text-fill-color:currentColor!important; }
+:root[data-research] .research-input-active::placeholder { color:#b7b8c2!important; -webkit-text-fill-color:#b7b8c2!important; }
+
+/* Keep quick actions inside their own viewport, when the keyboard is open.
+   Fade the last 24px before the composer instead of showing a hard overlap. */
+:root[data-research][data-research-keyboard="true"] .stage.is-manual-chat:not(.is-conversation) .upper {
+ top:var(--research-intro-top); height:var(--research-intro-height);
+ overflow-x:hidden!important; overflow-y:auto!important;
+ box-sizing:border-box; padding-bottom:min(24px,var(--research-intro-height));
+ pointer-events:auto; touch-action:pan-y; overscroll-behavior-y:contain;
+ -webkit-mask-image:linear-gradient(to bottom,#000 0,#000 calc(100% - 24px),transparent 100%);
+ mask-image:linear-gradient(to bottom,#000 0,#000 calc(100% - 24px),transparent 100%);
+}
+:root[data-research] .stage.is-manual-chat #assistantComposer {
+ background:#fff;
+}

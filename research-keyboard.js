@@ -16,24 +16,9 @@
   preview.hidden = true;
   document.body.append(preview);
   function refreshPreview() {
-    if (!active) { preview.hidden = true; return; }
-    const rect = active.getBoundingClientRect();
-    const cs = getComputedStyle(active);
-    for (const prop of ['fontFamily','fontSize','fontWeight','lineHeight','letterSpacing','paddingTop','paddingRight','paddingBottom','paddingLeft','textAlign']) preview.style[prop] = cs[prop];
-    Object.assign(preview.style, {left:rect.left+'px',top:rect.top+'px',width:rect.width+'px',height:rect.height+'px'});
-    const cursor = document.createElement('span');
-    cursor.className = 'research-input-caret';
-    if (active.value) {
-      const position = active.selectionStart ?? active.value.length;
-      preview.replaceChildren(document.createTextNode(active.value.slice(0, position)), cursor, document.createTextNode(active.value.slice(position)));
-    } else {
-      const placeholder = document.createElement('span');
-      placeholder.className = 'research-input-placeholder';
-      placeholder.textContent = active.placeholder || '';
-      preview.replaceChildren(cursor, placeholder);
-    }
-    preview.hidden = false;
-    preview.scrollTop = preview.scrollHeight;
+    // Render the real textarea value in its own layout box. A fixed duplicate
+    // drifted away during composer transforms and viewport resize animations.
+    preview.hidden = true;
   }
   const paint = () => requestAnimationFrame(refreshPreview);
   window.addEventListener('resize', paint);
@@ -149,6 +134,18 @@
       event.preventDefault();
       event.stopImmediatePropagation();
       focus(event.target);
+      return;
+    }
+    // The composer includes a logo, background and padding outside the textarea.
+    // Those clicks used to toggle only the source keyboard class, not this panel.
+    const composer = event.target.closest('#assistantComposer, #contactComposer, .page-input');
+    if (composer && !event.target.closest('button')) {
+      const input = composer.querySelector('textarea,input');
+      if (input && editable(input) && !input.disabled) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        focus(input);
+      }
     }
   }, true);
   // Prevent Safari from focusing controls via a synthesized click or tab navigation.
