@@ -365,7 +365,8 @@
     var note = threadStore && chatView.querySelector('.hub-compose-note');
     var noteSpace = note ? note.offsetHeight + 28 : 60;
     if (threadStore) chatView.style.setProperty('--compose-note-space', noteSpace + 'px');
-    var bottom=keyboard ? keyboard+(threadStore && applicationState.threadStatus === 'new' ? noteSpace : 12) : 34;
+    var researchKeyboard = window.SpotlightResearch && document.documentElement.dataset.researchKeyboard === 'true';
+    var bottom=researchKeyboard ? (threadStore && applicationState.threadStatus === 'new' ? noteSpace : 12) : keyboard ? keyboard+(threadStore && applicationState.threadStatus === 'new' ? noteSpace : 12) : 34;
     var top=VIEW_H-bottom-height-chatView.offsetTop;
     if (threadStore) chatView.style.setProperty('--hub-glow-top', (top + height - 60) + 'px');
     placeComposer(variant,top,height);
@@ -375,6 +376,10 @@
     var introTop=upper.offsetTop+greeting.offsetTop-35;
     var introBottom=upper.offsetTop+chips.offsetTop+chips.offsetHeight-34;
     var headerBottom=chatView.offsetTop+chatView.querySelector('.flow-header').offsetHeight;
+    if (window.SpotlightResearch) {
+      stage.style.setProperty('--research-intro-top', (headerBottom + 12) + 'px');
+      stage.style.setProperty('--research-intro-height', Math.max(0, top + chatView.offsetTop - headerBottom - 24) + 'px');
+    }
     var shift=empty ? (keyboard ? 89.6-greeting.offsetTop : (headerBottom+top+chatView.offsetTop-introBottom-introTop)/2) : 0;
     stage.style.setProperty('--intro-shift',shift+'px');
   }

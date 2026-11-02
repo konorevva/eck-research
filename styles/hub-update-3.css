@@ -1499,8 +1499,8 @@
 /* Optical alignment: the unread badge makes the mail shortcut heavier on the right. */
 [data-hub-update="3"] .hub-connection-buttons .communication-action[data-open-letters] { position:relative; left:-3px; }
 
-/* Branded AI entry in the unified MVP dock. */
+/* Input orb reused in the unified communication dock. */
 :root[data-hub-update="3"][data-unified-tabbar="true"] #entrySpotlight img {
-  content: url("../assets/figma/v2/ai-tab-brand.svg");
+  content: url("../assets/figma/refresh/input-logo.svg");
   filter: none;
 }

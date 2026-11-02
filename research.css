@@ -63,3 +63,25 @@ html,body { width:100%; height:100%; background:#fff; overscroll-behavior:none; 
  width:auto;
  bottom:12px;
 }
+
+/* The keyboard replaces the Home indicator area; do not leave its safe-area gap above it. */
+:root[data-research][data-research-keyboard="true"] .stage-wrap { padding-bottom:0; }
+
+/* With the keyboard open, the greeting is a scrollable region BETWEEN the fixed
+   title and composer. Source transforms assumed the full 852px mockup height. */
+:root[data-research][data-research-keyboard="true"] .stage.is-manual-chat:not(.is-conversation) .upper {
+ top:var(--research-intro-top); height:var(--research-intro-height);
+ overflow-x:hidden!important; overflow-y:auto!important; pointer-events:auto;
+ overscroll-behavior-y:contain; touch-action:pan-y; scrollbar-width:none;
+}
+:root[data-research][data-research-keyboard="true"] .stage.is-manual-chat .upper .stories { display:none; }
+:root[data-research][data-research-keyboard="true"] .stage.is-manual-chat .upper .greeting {
+ position:relative; top:auto; left:auto; margin:0 24px 20px;
+ transform:none!important;
+}
+:root[data-research][data-research-keyboard="true"] .stage.is-manual-chat .upper .chips {
+ position:relative; top:auto; left:auto; transform:none!important; margin:0;
+}
+:root[data-research][data-research-keyboard="true"] .hub-compose-note {
+ white-space:normal; left:16px; right:16px;
+}

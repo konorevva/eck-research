@@ -31,6 +31,11 @@
     root.dataset.important = String(state.important);
     root.dataset.insights = String(state.insights);
     root.dataset.unifiedTabbar = String(state.unifiedTabbar);
+    const entry = document.querySelector('#entrySpotlight');
+    if (entry) {
+      entry.setAttribute('aria-label', state.unifiedTabbar ? 'Открыть связь' : 'Открыть АИ');
+      entry.lastChild.textContent = state.unifiedTabbar ? 'Связь' : 'АИ';
+    }
     root.dataset.connectionDisplay = state.connectionDisplay;
   }
   attributes();
@@ -112,9 +117,9 @@
       // A click anywhere on the card opens its thread; outside clicks only dismiss it.
     }, {capture:true});
     const entry = document.querySelector('#entrySpotlight');
-    entry.setAttribute('aria-label', 'Открыть АИ');
+    entry.setAttribute('aria-label', state.unifiedTabbar ? 'Открыть связь' : 'Открыть АИ');
     // Keep the existing button/listener. The split orb uses the original local asset.
-    entry.lastChild.textContent = 'АИ';
+    entry.lastChild.textContent = state.unifiedTabbar ? 'Связь' : 'АИ';
     window.addEventListener('message', event => {
       if (event.source !== parent || event.origin !== location.origin || event.data?.type !== 'spotlight-hub:configuration') return;
       const requested = event.data.configuration;
