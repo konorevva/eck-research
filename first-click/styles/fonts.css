@@ -1,0 +1,25 @@
+/* Alfa Interface Sans (core-ds). Файлы взяты из соседнего прототипа Spotlight/Core-flow. */
+
+@font-face {
+  font-family: 'Alfa Interface';
+  src: url('../fonts/alfa-interface-sans_regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Alfa Interface';
+  src: url('../fonts/alfa-interface-sans_medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Alfa Interface';
+  src: url('../fonts/alfa-interface-sans_bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}

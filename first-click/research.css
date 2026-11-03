@@ -1,0 +1,149 @@
+/* Opt-in responsive research surface. Typography and controls stay at native CSS sizes. */
+:root { color-scheme:light only; --research-height:100dvh; --research-offset:0px; --research-switch-height:0px; }
+html,body { width:100%; height:100%; background:#fff; overscroll-behavior:none; }
+:root[data-research] .stage-wrap { top:var(--research-offset); bottom:auto; height:var(--research-height); padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); display:block; }
+:root[data-research] .stage { position:relative; top:var(--research-switch-height); left:0; width:100%; height:calc(100% - var(--research-switch-height)); border-radius:0; box-shadow:none; transform:none!important; }
+:root[data-research] :is(.viewport,.sheet,.sheet-list) { width:100%; height:var(--embed-height,100%); }
+:root[data-research] :is(.upper,.stories,.chips,.seg,.list-inner,.content-pane,.input-haze) { width:100%; }
+:root[data-research] :is(.status-bar,.home-indicator,.ios-keyboard) { display:none!important; }
+:root[data-research] :is(.ctl--cross) { left:auto; right:16px; }
+:root[data-research] .ctl.nav-control { left:auto; right:70px; }
+:root[data-research] .page-input-dock .page-input,
+:root[data-research] #directoryView .hub-request-input { width:calc(100% - 40px); }
+:root[data-research] .page-input .field-text { width:calc(100% - 72px); }
+:root[data-research] .entry-tabbar { top:auto; bottom:12px; width:auto; left:12px; right:12px; }
+:root[data-research] .entry-search { width:calc(100% - 40px); }
+/* The source dashboard is a static bank screenshot, not a set of product components.
+   Crop its simulated system status bar; the interactive ECK surfaces below are fluid. */
+:root[data-research] .entry-scroll { padding-bottom:110px; }
+:root[data-research] .dashboard-render { position:relative; top:0; width:100%; height:auto; object-fit:contain; transform:translateY(-5.164319%); margin:0; }
+:root[data-research] .hub-dashboard-actions { left:66.6667%; width:33.3333%; }
+:root[data-research] .hub-proactive-card { bottom:90px; }
+:root[data-research] :is(textarea,input,select) { font-size:17px; }
+:root[data-research] .hub-call-sheet { max-height:calc(100% - 32px); bottom:8px; overflow-y:auto; }
+:root[data-research] :is(.hub-more-sheet,.hub-dialog-sheet,.event-popover) { max-height:calc(100% - 24px); overflow-y:auto; }
+:root[data-research] .chat-input { max-width:100%; }
+:root[data-research] .communication-actions { display:flex; justify-content:space-between; gap:8px; }
+:root[data-research] .communication-action { min-width:0; flex:1; }
+/* At short heights, keep the existing list accessible immediately below the navbar. */
+@media(max-height:600px) {
+ :root[data-research] .hub-call-sheet { max-height:calc(100% - 16px); }
+}
+:root[data-research] #chatView.has-manager-title .flow-header h1 small { max-width:100%; overflow:hidden; text-overflow:ellipsis; }
+:root[data-research] .hub-more-glass { max-width:calc(100% - 16px); max-height:calc(100% - 32px); overflow-y:auto; }
+:root[data-research] .hub-reminder-settings { max-height:calc(100% - 24px); overflow-y:auto; }
+@media(max-height:600px) {
+ :root[data-research] #chatView > .hub-statement-options.is-questionnaire .hub-task-card { overflow-y:auto; }
+ :root[data-research] #chatView > .hub-statement-options.is-questionnaire .hub-task-choices { flex-shrink:0; overflow:visible; }
+}
+
+:root[data-research] .viewport { overflow:clip; }
+:root[data-research] .entry-scroll { position:absolute; inset:0; overflow-x:hidden; overflow-y:auto; padding-bottom:110px; scrollbar-width:none; overscroll-behavior:contain; }
+:root[data-research] .entry-tabbar { z-index:3; }
+
+:root[data-research] .research-dashboard-art { width:100%; aspect-ratio:393 / 713; overflow:hidden; }
+:root[data-research] .hub-dashboard-profile { left:auto; right:16px; }
+:root[data-research] .entry-point { container-type:inline-size; }
+:root[data-research] .hub-dashboard-role { top:13.486cqw; left:19.338cqw; }
+:root[data-research] .hub-dashboard-actions { top:5.089cqw; height:16.794cqw; }
+:root[data-research] .entry-search { top:25.191cqw; }
+:root[data-research] .event-strip-clip { width:calc(100% + 20px); }
+:root[data-research] .greeting { width:calc(100% - 48px); }
+:root[data-research] .scrim { width:100%; }
+:root[data-research] .event-popover { max-width:calc(100% - 16px); }
+/* Desktop review keeps mobile line lengths; touch devices use their full viewport. */
+@media (min-width:601px) and (hover:hover) and (pointer:fine) {
+ :root[data-research] .stage-wrap { max-width:430px; margin-inline:auto; }
+}
+/* The target dock reserves 62px for the separate AI button and a 12px gap.
+   Override the source's fixed 279px navigation width on every research viewport. */
+:root[data-research][data-hub-update="3"][data-unified-tabbar="false"] .entry-tabbar {
+ left:12px;
+ right:86px;
+ width:auto;
+ bottom:12px;
+}
+
+/* The keyboard replaces the Home indicator area; do not leave its safe-area gap above it. */
+:root[data-research][data-research-keyboard="true"] .stage-wrap { padding-bottom:0; }
+
+/* Center the empty-chat introduction in the space between title and composer.
+   Auto margins collapse on short screens, keeping the overflow scrollable. */
+:root[data-research] .stage.is-manual-chat:not(.is-conversation) .upper {
+ top:var(--research-intro-top); height:var(--research-intro-height);
+ display:flex; flex-direction:column;
+ overflow-x:hidden!important; overflow-y:auto!important; pointer-events:auto;
+ overscroll-behavior-y:contain; touch-action:pan-y; scrollbar-width:none;
+}
+:root[data-research] .stage.is-manual-chat .upper .stories { display:none; }
+:root[data-research] .stage.is-manual-chat .upper .greeting {
+ position:relative; top:auto; left:auto; margin:auto 24px 20px; flex-shrink:0;
+ transform:none!important;
+}
+:root[data-research] .stage.is-manual-chat .upper .chips {
+ position:relative; top:auto; left:auto; transform:none!important; margin:0 0 auto; flex-shrink:0;
+}
+:root[data-research][data-research-keyboard="true"] .hub-compose-note {
+ white-space:normal; left:16px; right:16px;
+}
+
+/* Static dashboard: only the ECK surfaces contain scrollable content. */
+:root[data-research] .entry-scroll { overflow:hidden!important; padding-bottom:0; touch-action:none; }
+:root[data-research] .entry-point { overflow:hidden; overscroll-behavior:none; touch-action:none; }
+:root[data-research] .stage:not(.is-spotlight) .scroller { overflow:hidden!important; touch-action:none; }
+/* Plain local keyboard: four rows, no predictions, accessory toolbar or native focus. */
+:root[data-research] .research-keyboard {
+ position:fixed; z-index:10000; left:0; right:0;
+ top:calc(var(--research-offset,0px) + var(--research-visible-height,100dvh) - var(--research-keyboard-height,0px));
+ height:clamp(194px,32svh,260px); padding:8px 4px calc(8px + env(safe-area-inset-bottom));
+ display:flex; flex-direction:column; gap:7px; background:#d2d5db;
+ touch-action:manipulation; user-select:none; -webkit-user-select:none;
+}
+:root[data-research] .research-keyboard[hidden] { display:none; }
+:root[data-research] .research-keyboard-row { display:flex; flex:1; min-height:0; gap:4px; }
+:root[data-research] .research-keyboard-row:nth-child(3) { padding-inline:14px; }
+:root[data-research] .research-keyboard button {
+ appearance:none; -webkit-appearance:none; border:0; border-radius:6px;
+ min-width:0; padding:0; flex:1; background:#fff; color:#101114;
+ box-shadow:0 1px 0 #93979e; font:400 24px/1 var(--font-family);
+ touch-action:manipulation;
+}
+:root[data-research] .research-keyboard button:active { background:#b8bdc7; }
+:root[data-research] .research-keyboard-footer button { font-size:20px; background:#adb3be; }
+:root[data-research] .research-keyboard-footer .research-keyboard-space { flex:5; background:#fff; font-size:16px; }
+:root[data-research] .research-keyboard-footer .research-keyboard-enter { flex:1.5; background:#1677ff; color:#fff; font-size:28px; }
+:root[data-research] .research-keyboard-row .research-keyboard-delete { flex:1.35; background:#adb3be; }
+:root[data-research-custom-keyboard] .stage.is-manual-chat .upper { animation:none!important; }
+:root[data-research-custom-keyboard] textarea { -webkit-user-select:none; user-select:none; }
+@media (min-width:601px) and (hover:hover) and (pointer:fine) {
+ :root[data-research] .research-keyboard { max-width:430px; margin-inline:auto; }
+}
+@media (max-height:500px) {
+ :root[data-research] .research-keyboard { height:36svh; padding-top:4px; padding-bottom:calc(4px + env(safe-area-inset-bottom)); gap:4px; }
+ :root[data-research] .research-keyboard button { font-size:18px; }
+}
+
+:root[data-research] .research-input-preview {
+ position:fixed; z-index:9999; pointer-events:none; overflow:hidden; white-space:pre-wrap;
+ overflow-wrap:break-word; color:var(--text-primary,#111); box-sizing:border-box;
+}
+:root[data-research] .research-input-preview[hidden] { display:none; }
+:root[data-research] .research-input-caret { display:inline-block; width:0; height:1.1em; border-left:2px solid #1677ff; vertical-align:text-bottom; }
+:root[data-research] .research-input-placeholder { color:#b7b8c2; }
+:root[data-research] .research-input-active { color:var(--text-primary,#111)!important; -webkit-text-fill-color:currentColor!important; }
+:root[data-research] .research-input-active::placeholder { color:#b7b8c2!important; -webkit-text-fill-color:#b7b8c2!important; }
+
+/* Keep quick actions inside their own viewport at either keyboard state.
+   Fade the last 24px before the composer instead of showing a hard overlap. */
+:root[data-research] .stage.is-manual-chat:not(.is-conversation) .upper {
+ top:var(--research-intro-top); height:var(--research-intro-height);
+ display:flex; flex-direction:column;
+ overflow-x:hidden!important; overflow-y:auto!important;
+ box-sizing:border-box; padding:0;
+ pointer-events:auto; touch-action:pan-y; overscroll-behavior-y:contain;
+ -webkit-mask-image:linear-gradient(to bottom,#000 0,#000 calc(100% - 24px),transparent 100%);
+ mask-image:linear-gradient(to bottom,#000 0,#000 calc(100% - 24px),transparent 100%);
+}
+:root[data-research] .stage.is-manual-chat #assistantComposer {
+ background:#fff;
+}

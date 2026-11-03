@@ -1,0 +1,333 @@
+/* Dark review variant (open with ?theme=dark). Source: Figma aUUCQdxgAO01ExoiYsOjNl,
+   dark section 44:6951 (BlueTint Dark mode). Colours only: every rule is scoped to
+   :root[data-theme="dark"], so the light version cannot change. Layout, sizes and
+   behaviour are inherited unchanged from the light stylesheets. */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Figma dark palette */
+  --bg-base-dark: #0e0e0e;            /* dashboard, page */
+  --bg-elevated-dark: #1c1c1e;        /* sheets, pages */
+  --surface-dark: #29292c;            /* Focus content sheet */
+  --surface-dark-elevated: #262629;   /* inputs, event cards */
+  --surface-glass-dark: rgba(49,49,54,.8);
+  --surface-muted-dark: rgba(214,214,229,.07);
+  --text-primary-dark: rgba(255,255,255,.88);
+  --text-strong-dark: rgba(255,255,255,.94);
+  --text-secondary-dark: rgba(238,238,251,.55);
+  --text-tertiary-dark: rgba(238,238,251,.30);
+  --icon-dark: #f2f3f5;
+  --border-soft-dark: rgba(225,225,248,.09);
+  --glow-violet-dark: #8f82e6;
+  --glow-pink-dark: #e0578f;
+
+  /* Base tokens (tokens.css) */
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --neutral-0: var(--surface-dark);
+  --neutral-1300: var(--icon-dark);
+  --neutral-translucent-0: var(--surface-muted-dark);
+  --neutral-translucent-100: var(--surface-muted-dark);
+  --neutral-translucent-700: var(--text-secondary-dark);
+  --segmentedcontrol-background: rgba(118,118,128,.24);
+  --page-bg: var(--bg-base-dark);
+
+  /* Refresh tokens (figma-2026-09-29.css) */
+  --surface-white: var(--surface-dark-elevated);
+  --surface-glass: var(--surface-glass-dark);
+  --surface-glass-strong: var(--surface-glass-dark);
+  --surface-muted: var(--surface-muted-dark);
+  --chip-bg: var(--surface-glass-dark);
+  --chip-border: linear-gradient(90deg,#67434e,#303036 47%,#4b3d8a);
+  --control-glass: rgba(153,153,153,.17);
+  --control-edge: 0 0 0 .5px rgba(255,255,255,.14), 0 8px 15px rgba(0,0,0,.02);
+  --border-soft: var(--border-soft-dark);
+  --text-tertiary: var(--text-tertiary-dark);
+  --placeholder: rgba(233,233,250,.33);
+  --bubble-bank: var(--bg-base-dark);
+  --bubble-bank-border: var(--bg-elevated-dark);
+  --bubble-contact-user: var(--surface-muted-dark);
+  --badge-red: #ff4837;
+
+  /* Ambient light (focus-ambient.css): same scene and motion, deeper colours */
+  --focus-bg-base: var(--bg-elevated-dark);
+  --focus-glow-violet: var(--glow-violet-dark);
+  --focus-glow-pink: var(--glow-pink-dark);
+  --focus-glow-opacity: .4;
+}
+:root[data-theme="dark"] .chat-view {
+  --ai-bubble-bg: var(--surface-glass-dark);
+  --ai-bubble-border: var(--border-soft-dark);
+  --ai-bubble-outline: transparent;
+}
+:root[data-theme="dark"] body,
+:root[data-theme="dark"] .stage { color: var(--text-primary); }
+
+/* Monochrome icons become light; coloured icons, photos and stories keep their colours. */
+:root[data-theme="dark"] :is(.ctl img, .flow-control:not(.nav-assistant):not(.detail-assistant) img,
+  .chip:not([data-long-press]) img, .communication-tile > img, .list-footer .ico img,
+  .title-chevron, .manager-contact .profile-icon img, #markEventRead img,
+  .status-bar img, .entry-tabbar button:not(.is-active) img, .contact-composer button img) {
+  filter: brightness(0) invert(.95);
+  opacity: 1;
+}
+:root[data-theme="dark"] :is(.profile-info .profile-icon img, .detail-actions button img) {
+  filter: brightness(0) invert(.93);
+  opacity: .55;
+}
+:root[data-theme="dark"] .detail-actions button img { opacity: .88; }
+:root[data-theme="dark"] .chat-section-title img { content: url('../assets/figma/2026-09-29/dark/chevron-section.svg'); }
+:root[data-theme="dark"] .search-field > img { content: url('../assets/figma/2026-09-29/dark/search-soft.svg'); }
+
+/* Status bar and dashboard */
+:root[data-theme="dark"] .stage.is-spotlight .status-bar { color: var(--icon-dark); }
+:root[data-theme="dark"] .stage.is-spotlight .status-battery::before { background: var(--icon-dark); }
+:root[data-theme="dark"] .status-battery { border-color: rgba(242,243,245,.35); }
+:root[data-theme="dark"] .stage.is-spotlight .page-bg,
+:root[data-theme="dark"] .entry-point { background: var(--bg-base-dark); }
+:root[data-theme="dark"] .stage.is-spotlight .entry-point { filter: brightness(.62); }
+:root[data-theme="dark"] .dashboard-render { content: url('../assets/figma/2026-09-29/dark/dashboard.png'); }
+:root[data-theme="dark"] .entry-tabbar { background: rgba(38,38,41,.94); box-shadow: 0 0 0 1px rgba(255,255,255,.06); }
+:root[data-theme="dark"] .entry-tabbar button { color: var(--icon-dark); }
+:root[data-theme="dark"] .entry-tabbar button.is-active { background: var(--surface-muted-dark); color: #f83a2a; }
+
+/* Focus upper area */
+:root[data-theme="dark"] .greeting { color: var(--text-strong-dark); }
+:root[data-theme="dark"] .story { background: rgba(255,255,255,.8); }
+:root[data-theme="dark"] .story--ring { background: linear-gradient(120deg,rgba(224,19,49,.5) 26%,rgba(41,40,48,.5) 51%,rgba(122,85,190,.5) 72%); }
+:root[data-theme="dark"] .chip { color: var(--text-primary); box-shadow: inset 0 0 0 .5px rgba(255,255,255,.06), 0 1px 3px rgba(0,0,0,.2); }
+:root[data-theme="dark"] :is(#field,.page-input) { background: rgba(38,38,41,.4); }
+:root[data-theme="dark"] :is(#field,.page-input) .field-grad {
+  background: linear-gradient(90deg,rgb(177 163 255 / 24%),rgb(255 55 55 / 3%));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
+}
+:root[data-theme="dark"] :is(#field,.page-input) .field-inner { box-shadow: inset 0 0 0 1px rgba(255,255,255,.04); }
+:root[data-theme="dark"] :is(#field,.page-input) .field-glass { background: rgba(38,38,41,.9); }
+:root[data-theme="dark"] :is(#field,.page-input) .field-text::placeholder { color: var(--placeholder); }
+:root[data-theme="dark"] .modal > .focus-ambient::after { background: var(--surface-dark); }
+:root[data-theme="dark"] .scrim { background: linear-gradient(180deg,#29292c00 0%,#29292c18 28%,#29292c66 60%,#29292cc7 84%,#29292c 100%); }
+
+/* Focus sheet */
+:root[data-theme="dark"] .seg-track { background: var(--segmentedcontrol-background); }
+:root[data-theme="dark"] .communication-action { color: var(--text-primary); }
+:root[data-theme="dark"] :is(.v2-connection .row-title, #directoryRows .row-title) { color: var(--text-primary); }
+:root[data-theme="dark"] .event-card,
+:root[data-theme="dark"] .event-card--currency,
+:root[data-theme="dark"] button.event-card--payment { background: var(--surface-dark-elevated); border-color: var(--bg-elevated-dark); }
+:root[data-theme="dark"] .event-card--currency { background: #1e2c37; border-color: #1e2c37; }
+:root[data-theme="dark"] .event-card--currency .event-card-note { color: var(--text-primary); }
+:root[data-theme="dark"] .event-progress { background: linear-gradient(90deg,#ff755e 0 8.9109%,#fda136 8.9109% 83.4983%,#17d055 83.4983% 100%); }
+:root[data-theme="dark"] .recommendation-tag--blue { color: #4a9dfc; }
+:root[data-theme="dark"] .recommendation-tag--purple { color: #d884fe; }
+:root[data-theme="dark"] .recommendation-tag--teal { color: #09c8d0; }
+
+/* Long tap */
+:root[data-theme="dark"] .event-popover { box-shadow: inset 0 0 0 1px rgba(214,214,229,.07), 0 0 9px rgba(0,0,0,.2); }
+:root[data-theme="dark"] :is(.event-popover h2, .event-popover p, .event-popover button) { color: var(--text-primary); }
+
+/* Pages */
+:root[data-theme="dark"] .flow-view,
+:root[data-theme="dark"] .chat-view.is-pushed,
+:root[data-theme="dark"] .chat-search-panel { background: var(--bg-elevated-dark); }
+:root[data-theme="dark"] .chat-view.is-manual { background: transparent; }
+:root[data-theme="dark"] .flow-header,
+:root[data-theme="dark"] .native-header { background: rgba(28,28,30,.94); }
+:root[data-theme="dark"] .chat-view:not(.is-contact) .flow-header { background: transparent; }
+
+/* Spotlight chat */
+:root[data-theme="dark"] .chat-view:not(.is-contact) .chat-message.user { color: var(--text-strong-dark); }
+:root[data-theme="dark"] .chat-view:not(.is-contact) .chat-message.assistant { color: var(--text-primary); }
+:root[data-theme="dark"] :is(.chat-loader, .chat-message.assistant.is-loading) { color: rgba(238,238,251,.38); }
+:root[data-theme="dark"] .shared-composer.is-chat .field-inner { box-shadow: inset 0 0 0 1px #3b3b3b; }
+:root[data-theme="dark"] .shared-composer.is-chat::before { box-shadow: inset 0 0 0 1px #3b3b3b; }
+:root[data-theme="dark"] .shared-composer #chatSend { background: var(--surface-muted-dark); }
+:root[data-theme="dark"] .ios-keyboard > img { content: url('../assets/figma/2026-09-29/dark/keyboard.png'); }
+
+/* Support and manager chat */
+:root[data-theme="dark"] .chat-view.is-support .flow-header h1::after,
+:root[data-theme="dark"] .message-author { color: var(--text-tertiary); }
+:root[data-theme="dark"] .support-date { color: var(--text-secondary); }
+:root[data-theme="dark"] .chat-view.is-support .chat-message.support-deleted { color: rgba(233,233,250,.2); }
+:root[data-theme="dark"] .support-avatar.operator { background: var(--surface-muted-dark); color: var(--text-secondary); }
+:root[data-theme="dark"] .contact-composer {
+  background: var(--surface-muted-dark);
+  box-shadow: -56px 0 0 8px var(--bg-elevated-dark), 8px 0 0 8px var(--bg-elevated-dark), -56px 40px 0 8px var(--bg-elevated-dark), 8px 40px 0 8px var(--bg-elevated-dark), -56px 80px 0 8px var(--bg-elevated-dark), 8px 80px 0 8px var(--bg-elevated-dark);
+}
+:root[data-theme="dark"] .contact-composer::before { background: var(--surface-muted-dark) url('../assets/figma/2026-09-29/dark/paperclip-support.svg') center / 24px 24px no-repeat; }
+:root[data-theme="dark"] .contact-composer button { background: var(--surface-muted-dark); }
+
+/* Directories, profile, events */
+:root[data-theme="dark"] .native-scroll > h2,
+:root[data-theme="dark"] #directoryRows h2,
+:root[data-theme="dark"] .manager-row,
+:root[data-theme="dark"] .profile-info,
+:root[data-theme="dark"] .manager-contact p,
+:root[data-theme="dark"] .search-field input { color: var(--text-primary); }
+:root[data-theme="dark"] .search-field:focus-within { box-shadow: 0 0 0 2px rgba(255,255,255,.12); }
+:root[data-theme="dark"] .manager-contact .profile-icon { background: var(--surface-muted-dark); }
+:root[data-theme="dark"] .directory-primary { background: #fff; color: #0e0e0e; }
+:root[data-theme="dark"] .directory-empty { color: var(--text-secondary); }
+:root[data-theme="dark"] .notification-detail > p { color: rgba(255,255,255,.55); }
+:root[data-theme="dark"] .event-steps li::before { background: #2b2736; color: var(--text-strong-dark); }
+:root[data-theme="dark"] .event-steps li:not(:last-child)::after { background: #2b2736; }
+
+/* ── Dark fidelity pass (reference: dark Figma Focus screenshot, 30 Sep) ─────────
+   Shared materials: translucent dark glass + soft blur + hairline light rim + faint
+   inner top light. The ambient light shows through; nothing becomes an opaque grey. */
+:root[data-theme="dark"] {
+  --glow-violet-dark: #8a84f2;          /* lavender / blue-violet centre */
+  --glow-pink-dark: #ff4870;            /* clean rose, no muddy midpoint */
+  --glass-fill-dark: rgba(62,62,72,.34);
+  --glass-rim-dark: rgba(255,255,255,.16);
+  --glass-top-light-dark: rgba(255,255,255,.09);
+  --control-glass: var(--glass-fill-dark);
+  --control-edge: inset 0 0 0 .75px var(--glass-rim-dark), inset 0 1px 0 var(--glass-top-light-dark), 0 6px 14px rgba(0,0,0,.16);
+  --chip-bg: rgba(48,46,56,.82);
+  --input-bg-dark: #262629;
+  --placeholder: rgba(235,235,245,.34);
+}
+:root[data-theme="dark"] .focus-ambient-light { filter: blur(120px) saturate(1); }
+
+/* Glass controls: crown, close, back, search, assistant */
+:root[data-theme="dark"] :is(.ctl, .flow-control) {
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  backdrop-filter: blur(24px) saturate(1.4);
+}
+
+/* Chips: translucent glass; the important chip keeps a thin warm→violet rim */
+:root[data-theme="dark"] .chip {
+  background: var(--chip-bg);
+  box-shadow: inset 0 0 0 .75px rgba(255,255,255,.05), inset 0 1px 0 rgba(255,255,255,.06);
+  color: rgba(255,255,255,.92);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+:root[data-theme="dark"] .chip[data-long-press] { position: relative; background: var(--chip-bg) padding-box; box-shadow: inset 0 1px 0 rgba(255,255,255,.07); }
+:root[data-theme="dark"] .chip[data-long-press]::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(90deg,rgba(255,105,110,.5),rgba(255,255,255,.14) 47%,rgba(140,122,255,.55));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* Custom Input: dark field inside a crisp light hairline and a faint colour rim */
+:root[data-theme="dark"] :is(#field,.page-input) { background: rgba(28,28,32,.3); }
+:root[data-theme="dark"] :is(#field,.page-input) .field-grad {
+  background: linear-gradient(90deg,rgba(150,140,255,.16),rgba(255,90,120,.07) 55%,rgba(150,140,255,.12));
+  box-shadow: none;
+}
+:root[data-theme="dark"] :is(#field,.page-input) .field-grad::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(100deg,rgba(255,255,255,.1),rgba(255,255,255,.42) 50%,rgba(255,255,255,.1));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+:root[data-theme="dark"] :is(#field,.page-input) .field-inner { background: var(--input-bg-dark); box-shadow: inset 0 0 0 .75px rgba(255,255,255,.05); }
+
+/* Segmented control: faint track, glass selected segment */
+:root[data-theme="dark"] .seg-track { background: rgba(118,118,128,.18); }
+:root[data-theme="dark"] .seg-item.is-active { background: rgba(255,255,255,.1); box-shadow: inset 0 0 0 .5px rgba(255,255,255,.1), inset 0 1px 0 rgba(255,255,255,.06); }
+
+/* Альфа-Интеллект bubbles (assistant chats only; contact chats are excluded upstream) */
+:root[data-theme="dark"] .chat-view {
+  --ai-bubble-bg: rgba(78,78,92,.38);
+  --ai-bubble-border: rgba(255,255,255,.1);
+  --ai-bubble-outline: transparent;
+  --ai-bubble-blur: blur(24px) saturate(1.3);
+}
+:root[data-theme="dark"] .chat-view:not(.is-contact) .chat-message.user {
+  box-shadow: inset 0 0 0 1px var(--ai-bubble-border), inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+/* Assistant composer: glass field and attachment button over the light */
+:root[data-theme="dark"] .shared-composer.is-chat .field-inner {
+  background: rgba(38,38,44,.55);
+  box-shadow: inset 0 0 0 .75px rgba(255,255,255,.12), inset 0 1px 0 rgba(255,255,255,.05);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  backdrop-filter: blur(20px) saturate(1.3);
+}
+:root[data-theme="dark"] .shared-composer.is-chat::before {
+  background-color: rgba(38,38,44,.55);
+  box-shadow: inset 0 0 0 .75px rgba(255,255,255,.12), inset 0 1px 0 rgba(255,255,255,.05);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  backdrop-filter: blur(20px) saturate(1.3);
+}
+
+/* Long-tap window: dark glass */
+:root[data-theme="dark"] .event-popover {
+  background: rgba(44,44,52,.62);
+  box-shadow: inset 0 0 0 .75px rgba(255,255,255,.12), inset 0 1px 0 rgba(255,255,255,.07), 0 8px 24px rgba(0,0,0,.25);
+}
+
+/* Story rims in dark run violet (lower left) → crimson (upper right) */
+:root[data-theme="dark"] .story--ring { background: linear-gradient(40deg,rgba(122,85,190,.6) 26%,rgba(41,40,48,.5) 51%,rgba(224,19,49,.55) 74%); }
+
+/* ── Material correction (paired current/target references, 30 Sep) ───────────── */
+/* Navigation controls: faint translucent glass, hairline dark outline, fine inner top
+   edge and a slightly brighter inner bottom. No outer drop shadow. */
+:root[data-theme="dark"] :is(.ctl, .flow-control) {
+  background: linear-gradient(180deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.07) 55%,rgba(255,255,255,.13) 100%);
+  box-shadow: 0 0 0 .5px rgba(0,0,0,.55), inset 0 .75px 0 rgba(255,255,255,.26), inset 0 -.75px 0 rgba(255,255,255,.2);
+}
+/* Custom Input: 1px rim (lavender left, white highlight centre top/bottom, dim right),
+   4px lavender→rose band fading out, solid field. */
+:root[data-theme="dark"] :is(#field,.page-input) { background: none; }
+:root[data-theme="dark"] :is(#field,.page-input) .field-grad {
+  background: linear-gradient(90deg,rgba(177,163,255,.24) 0%,rgba(205,125,175,.14) 50%,rgba(255,80,90,.04) 100%);
+}
+:root[data-theme="dark"] :is(#field,.page-input) .field-grad::before {
+  background: linear-gradient(90deg,rgba(170,160,215,.5) 0%,rgba(255,255,255,.14) 24%,rgba(255,255,255,.92) 50%,rgba(255,255,255,.14) 76%,rgba(255,255,255,.05) 100%);
+}
+:root[data-theme="dark"] :is(#field,.page-input) .field-inner { box-shadow: none; }
+/* Compact (transformed) Spotlight-star button: no ring. The morph sets an inline edge
+   shadow; dark overrides it without adding another border. */
+:root[data-theme="dark"] :is(#field,.page-input) { box-shadow: none !important; }
+/* Compact star button = the close button's glass, composed over the docked #1C1C1E header. */
+:root[data-theme="dark"] :is(#field,.page-input) .field-glass {
+  background: linear-gradient(180deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.07) 55%,rgba(255,255,255,.13) 100%), #1c1c1e;
+  box-shadow: inset 0 0 0 .5px rgba(0,0,0,.55), inset 0 .75px 0 rgba(255,255,255,.26), inset 0 -.75px 0 rgba(255,255,255,.2);
+}
+/* Focus pseudo-sheet (Связь / Инсайты): solid #1C1C1E with a 1px inside border. */
+:root[data-theme="dark"] #sheet { background: #1c1c1e; box-shadow: inset 0 0 0 1px rgba(214,214,229,calc(.07 * (1 - var(--ambient-dock, 0)))) !important; }
+:root[data-theme="dark"] .modal > .focus-ambient::after { background: #1c1c1e; }
+:root[data-theme="dark"] .scrim { background: linear-gradient(180deg,#1c1c1e00 0%,#1c1c1e18 28%,#1c1c1e66 60%,#1c1c1ec7 84%,#1c1c1e 100%); }
+/* Long-tap window: #1C1C1E at 80%, blur kept, only a faint inside edge. */
+:root[data-theme="dark"] .event-popover { background: rgba(28,28,30,.8); box-shadow: inset 0 0 0 .5px rgba(214,214,229,.07); }
+
+/* Dashboard Custom Input (dark): same structure as light; dark glass field
+   composing to Figma #262629, a slightly softer hairline, muted light placeholder. */
+:root[data-theme="dark"] .entry-search {
+  --entry-field: rgba(38,38,41,.9);
+  --entry-hairline: linear-gradient(90deg,rgba(255,255,255,.18) 0%,rgba(255,255,255,.9) 53%,rgba(255,255,255,.06) 100%);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  color: rgba(235,235,245,.56);
+}
+
+/* Dark ambient hue balance (target: dark Focus screenshot). Same element, size, blur,
+   opacity and motion; only the composition changes: the cool layer covers a smaller,
+   bluer area, so rose owns the warm side and the meeting point reads lavender, not
+   magenta. Tokens: --glow-cool-dark (blue-lavender) over --glow-warm-dark (rose). */
+:root[data-theme="dark"] {
+  --glow-cool-dark: #8a92ea;
+  --glow-warm-dark: #ff4574;
+}
+:root[data-theme="dark"] .focus-ambient-light {
+  background: linear-gradient(0deg,var(--glow-cool-dark) 28%,rgb(138 146 234 / 0%) 82%),
+    linear-gradient(90deg,var(--glow-warm-dark),var(--glow-warm-dark));
+}

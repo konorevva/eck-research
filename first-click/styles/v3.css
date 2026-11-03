@@ -1,0 +1,221 @@
+/* UCC V3 — structural/navigation pass over V2. Figma aUUCQdxgAO01ExoiYsOjNl, section 59:13516 «V3 White».
+   Only the controls and regions that changed in V3 live here; every other surface is V2 unchanged.
+   Loaded after figma-2026-09-29.css and before theme-dark.css. */
+
+/* ── Shared navbar controls (one Threads bubble, one Kebab) ───────────────── */
+/* Figma NavBar «Buttons / Separate»: [bubble | kebab] 44px, 10px gap, then Close at 333. */
+.ctl.nav-control { left: 279px; }
+.flow-control.nav-control { right: 70px; }
+.nav-control[hidden] { display: none; }
+/* The bubble replaces the V2 contact-chat search control in the same slot (Figma Support 59:13923). */
+.chat-view .chat-search-toggle,
+.chat-view.is-contact .chat-search-toggle { display: none; }
+/* Figma New Thread / Thread navbar: Back, controls, Close — the title block is hidden. */
+#chatView:not(.is-contact) .flow-header h1 { visibility: hidden; }
+
+/* ── Focus :: Связь (Figma 59:14319) ─────────────────────────────────────── */
+/* Three shortcuts, 76px each, 16px apart from the left edge; no empty fourth slot. */
+.communication-actions--v3 { height: 106px; padding: 24px 20px 8px; justify-content: flex-start; gap: 16px; }
+.communication-actions--v3 .communication-action { flex: none; width: 76px; }
+
+/* Recent chats preview rows. */
+.chat-row {
+  appearance: none;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 72px;
+  margin: 0;
+  padding: 12px 20px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-family: var(--font-family);
+  text-align: left;
+  cursor: pointer;
+}
+.chat-row:focus-visible { outline: 2px solid var(--decorative-indigo); outline-offset: -2px; border-radius: 16px; }
+.chat-row-tile { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: var(--surface-muted); }
+.chat-row-tile img { width: 24px; height: 24px; }
+.chat-row-text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; padding: 0 16px; }
+.chat-row-title { display: block; margin-bottom: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 17px; line-height: 24px; letter-spacing: -.35px; color: rgba(14,14,14,.88); }
+.chat-row-sub { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 15px; line-height: 20px; letter-spacing: -.24px; color: var(--text-secondary); }
+.chat-row--wrap .chat-row-text { padding-right: 0; }
+.chat-row--wrap .chat-row-sub { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.chat-row-meta { flex: none; width: 42px; display: flex; flex-direction: column; align-items: flex-end; }
+.chat-row-meta time { font-size: 15px; line-height: 24px; letter-spacing: -.24px; color: var(--text-secondary); }
+.chat-row-badge { min-width: 23px; height: 24px; padding: 0 8px; border-radius: 80px; background: var(--badge-red); color: rgba(255,255,255,.94); font-size: 17px; line-height: 24px; font-weight: 700; text-align: center; }
+
+/* ── Custom Input: Figma «свечение» behind every bottom-placed instance ─── */
+.input-haze {
+  position: absolute; top: 0; left: 0; width: 393px; height: 94px;
+  overflow: hidden; opacity: .6; pointer-events: none;
+}
+.input-haze::before,
+.input-haze::after { content: ''; position: absolute; border-radius: 12px; opacity: .6; }
+.input-haze::before { left: 130px; top: 108px; width: 242px; height: 23px; background: rgba(250,40,169,.7); filter: blur(57px); }
+.input-haze::after { left: 92px; top: 108px; width: 210px; height: 46px; background: rgba(116,96,239,.3); filter: blur(32px); }
+
+/* Focus :: Scroll — the docked input's haze (position and opacity driven by render()). */
+.focus-input-haze { z-index: 134; opacity: 0; will-change: transform, opacity; }
+.stage.is-manual-chat .focus-input-haze { opacity: 0 !important; }
+
+/* ── Global Custom Input on product pages (Figma custom-input frame y 738, 393×80) ─── */
+.page-input-dock { position: absolute; left: 0; right: 0; bottom: 34px; height: 80px; z-index: 6; pointer-events: none; }
+.page-input-dock[hidden] { display: none; }
+.page-input-dock .input-haze { top: -14px; }
+/* Same component as the Focus #field, in its full state (render() values at p = 0). */
+.page-input-dock .page-input {
+  top: 16px; left: 20px; width: 353px; height: 64px;
+  transform: none; will-change: auto; pointer-events: auto; cursor: pointer;
+}
+.page-input .field-text { width: 281px; cursor: pointer; }
+.page-input button { display: none; }
+
+/* Page content scrolls clear of the input (98px it covers + 24px) only where the central
+   GLOBAL_AI_INPUT_VISIBILITY config shows it (spotlight.js toggles .has-global-input). */
+#notificationsView.has-global-input .native-scroll,
+#notificationView.has-global-input .native-scroll.notification-detail { padding-bottom: 122px; }
+#directoryView[data-mode="threads"] #directoryContent { bottom: 0; }
+#directoryView.has-global-input #directoryContent { bottom: 0; padding-bottom: 122px; }
+
+/* ── Focus/AI :: Threads «Запросы» (Figma 64:8816) ───────────────────────── */
+/* No search: the list starts 20px under the navbar. */
+#directoryView[data-mode="threads"] #directoryRows:has(.row) { padding-top: 0; }
+/* The shared AI ambient light (focus-ambient.js) at the Figma «Gradi» 53%; rows stay on it. */
+#directoryView > .focus-ambient { display: none; }
+#directoryView[data-mode="threads"] > .focus-ambient { display: block; }
+#directoryView > .focus-ambient .focus-ambient-light { opacity: calc(var(--focus-glow-opacity) * .53); }
+#directoryView[data-mode="threads"] .native-header { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+/* ── AI home input: scroll docking off (INPUT_SCROLL_DOCK = false) ───────── */
+/* The input keeps its designed place in the upper content; scrim and sheet pass over it. */
+#field.is-content-placed { z-index: 15; }
+
+/* ── Shared AI compose ↔ Threads «Запросы» (one motion family, no page fades) ─ */
+/* Page curve cubic-bezier(.32,.72,0,1). Outgoing layer drops 32px and softens, incoming layer
+   rises 32px into place; opacity only ever accompanies the movement. Content 240 ms, the
+   travelling input 280 ms, the keyboard its own 360 ms slide (nothing waits for it). */
+/* Entry from Threads (tap the input): Запросы stays in place under the compose surface. */
+.stage.is-threads-compose #directoryView.is-behind { transform: none; }
+#directoryView .native-header,
+#directoryContent { transition: opacity .24s ease, translate .24s cubic-bezier(.32,.72,0,1); }
+/* The list drops away while the greeting rises in. */
+.stage.is-threads-compose:not(.is-threads-leaving) #directoryContent { opacity: 0; translate: 0 32px; }
+/* The navbar hands over in place (controls never slide). */
+.stage.is-threads-compose:not(.is-threads-leaving) #directoryView .native-header { opacity: 0; }
+/* Shared element: the slot's input hands over to the composer in the same frame (no crossfade). */
+.stage.is-threads-compose #directoryView .page-input-dock { opacity: 0; }
+@keyframes compose-intro-in { from { opacity: 0; translate: 0 32px; } to { opacity: 1; translate: 0 0; } }
+/* backwards only: once the entry ends the greeting follows the conversation state again. */
+.stage.is-threads-compose .upper { animation: compose-intro-in .24s cubic-bezier(.32,.72,0,1) backwards; }
+/* Back is driven by WAAPI in exitThreadsCompose(): no CSS fade on leaving. */
+.stage.is-threads-leaving .upper { animation: none; }
+
+/* Compose ↔ Threads via the bubble: Запросы is laid out in place UNDER the compose surface, so
+   the shared input stays visible while it travels; its own slot input appears at the handoff. */
+.stage:is(.is-threads-preview, .is-threads-overlay) #directoryView { visibility: visible; transform: none !important; transition: none; z-index: 100 !important; pointer-events: none; }
+.stage:is(.is-threads-preview, .is-threads-overlay) #directoryView .page-input-dock { opacity: 0; }
+/* New Thread → AI home: AI home is committed underneath in its final layout; the New Thread stays
+   on top as an overlay while its tint/navbar hand over; greeting/chips move above it; the AI-home
+   input appears only when the travelling composer lands on it. */
+.stage.is-compose-overlay #chatView { visibility: visible !important; opacity: 1 !important; z-index: 104 !important; pointer-events: none; }
+.stage.is-compose-overlay #chatView > .focus-ambient { display: block !important; }
+.stage.is-compose-overlay .upper { z-index: 106; overflow: visible; }
+.stage.is-compose-overlay #field { visibility: hidden !important; }
+/* Commit frames of a morph: positions snap to their final values without a second animation. */
+.stage.is-morph-snap :is(.greeting, .chips, .stories, .upper, .header, .sheet, .scrim, #directoryView .native-header, #directoryContent, #directoryView .page-input-dock) { transition: none !important; }
+/* Inline Active Thread → pushed page, in place, before the horizontal pop (no visible change). */
+.stage.is-pop-prep, .stage.is-pop-prep * { transition: none !important; }
+/* AI-home stories never ghost into a compose that did not start on AI home. */
+.stage:is(.is-threads-compose, .is-threads-overlay, .is-threads-preview) .stories { transition: none !important; opacity: 0 !important; }
+@media (prefers-reduced-motion: reduce) { .stage.is-threads-compose .upper { animation: none; } }
+
+/* ── Альфа-Интеллект input: ONE component on every AI screen ──────────────── */
+/* AI home (#field), Запросы (.page-input, cloned from #field) and the chat composer
+   (#assistantComposer: New Thread, Active Thread, Event help). Support / manager chats keep
+   their own composer. Figma Sptl: «Focus :: Connection» custom-input (resting) and
+   «Spotlight :: Thread» ChatBar (focused). Geometry (x/y/width/height) comes from JS;
+   everything else is a variable of [data-ai-state] and animates with it, so focus/blur
+   reshapes the same input — rim, surface, «+» and text never swap. */
+@property --ai-rim { syntax: '<length>'; inherits: true; initial-value: 4px; }
+@property --ai-radius { syntax: '<length>'; inherits: true; initial-value: 30px; }
+@property --ai-clip { syntax: '<length>'; inherits: true; initial-value: 20px; }
+@property --ai-text { syntax: '<length>'; inherits: true; initial-value: 56px; }
+@property --ai-clip-bottom { syntax: '<length>'; inherits: true; initial-value: 20px; }
+.ai-input:is(#field, #assistantComposer, .page-input) {
+  /* resting: 353×64 · 4px gradient rim · surface 345×56 · «+» at 20 · text at 56 */
+  --ai-rim: 4px; --ai-radius: 30px; --ai-clip: 20px; --ai-text: 56px; --ai-clip-bottom: 20px;
+  --ai-placeholder: rgba(4,4,19,.55);
+  border-radius: var(--ai-radius);
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: 0 4px 14px rgba(100,28,255,.04);
+  transition: --ai-rim .32s cubic-bezier(.32,.72,0,1), --ai-radius .32s cubic-bezier(.32,.72,0,1),
+    --ai-clip .32s cubic-bezier(.32,.72,0,1), --ai-text .32s cubic-bezier(.32,.72,0,1),
+    --ai-clip-bottom .32s cubic-bezier(.32,.72,0,1);
+}
+/* thin / focused (keyboard): 377×48 · 2px gradient rim · surface 373×44 · «+» at 12 · text at 48 ·
+   placeholder #050B2C 18% */
+.ai-input[data-ai-state="focused"]:is(#field, #assistantComposer, .page-input) {
+  --ai-rim: 2px; --ai-radius: 24px; --ai-clip: 12px; --ai-text: 48px; --ai-clip-bottom: 12px;
+  --ai-placeholder: rgb(5 11 44 / .18);
+}
+/* Rim: Figma frame fill — linear gradient at 24%: #B1A3FF · #FF3737 46% · #B69CF2 94%, over a
+   transparent base (the page shows through), plus a 1px white highlight stroke (glass). */
+.ai-input:is(#field, #assistantComposer, .page-input) .field-grad {
+  display: block;
+  inset: 0;
+  padding: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgb(177 163 255 / .24) 8.7%, rgb(255 55 55 / .11) 48.7%, rgb(182 156 242 / .227) 100%);
+  -webkit-mask: none;
+  mask: none;
+  box-shadow: none;
+}
+.ai-input:is(#field, #assistantComposer, .page-input) .field-glass {
+  display: block;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgb(255 255 255 / 0) 1%, #fff 53.4%, rgb(255 255 255 / 0) 100%);
+  box-shadow: none;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.ai-input:is(#field, #assistantComposer, .page-input) .field-inner {
+  inset: var(--ai-rim) !important;
+  border-radius: calc(var(--ai-radius) - var(--ai-rim)) !important;
+  background: #fff;
+  box-shadow: inset 0 0 4px rgb(255 255 255 / .25);
+}
+.ai-input:is(#field, #assistantComposer, .page-input) :is(.field-logo, .field-icon) { display: none; }
+.ai-input:is(#field, #assistantComposer, .page-input) .field-text {
+  left: var(--ai-text) !important;
+  font-size: 17px; line-height: 20px; padding: 8px 0; letter-spacing: -.41px; color: rgba(14,14,14,.88);
+}
+.ai-input:is(#field, #assistantComposer, .page-input) .field-text::placeholder { font-size: 17px; color: var(--ai-placeholder); }
+/* Attachment «+» (was the paperclip): inside the surface, grey #898991; its 6% circle only appears
+   as pressed feedback. Pinned to the bottom so a growing message keeps it in place. */
+.ai-input:is(#field, #assistantComposer, .page-input)::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  left: calc(var(--ai-clip) - 4px);
+  top: auto;
+  bottom: calc(var(--ai-clip-bottom) - 4px);
+  width: 32px;
+  height: 32px;
+  transform: none;
+  border-radius: 50%;
+  font-size: 0;
+  background: transparent url('../assets/figma/v3/input-plus.svg') center / 24px 24px no-repeat;
+  box-shadow: none;
+  pointer-events: none;
+}
+.ai-input:is(#field, #assistantComposer, .page-input):active::before { background-color: rgb(38 55 88 / .06); }
+#assistantComposer.ai-input #chatSend { right: calc(var(--ai-rim) + 4px); }

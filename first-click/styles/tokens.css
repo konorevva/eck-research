@@ -1,0 +1,42 @@
+/* Токены Figma (get_variable_defs, узел 305:7394 «Связь :: Full»).
+   Имена приведены к kebab-case, значения — как в макете. */
+
+:root {
+  /* text */
+  --text-primary: #030306e0;
+  --text-secondary: #0404138c;
+  --static-text-inverted-primary: #fffffff0;
+
+  /* neutral */
+  --neutral-0: #ffffff;
+  --neutral-1300: #212124;
+  --neutral-translucent-0: #ffffff;
+  --neutral-translucent-100: #2637580f;
+  --neutral-translucent-700: #04041578;
+  --neutral-translucent-1300: #030306e0;
+
+  /* accent / decorative / status */
+  --accent-primary: #ef3124;
+  --decorative-red: #fe5e48;
+  --decorative-indigo: #897eff;
+
+  /* surfaces */
+  --segmentedcontrol-background: #7676801f;
+  --liquid-glass-background-1: #f8f8f833;
+  --liquid-glass-background-3: #ffffff40;
+
+  /* сцена (замеры с эталонных рендеров Figma) */
+  --page-bg: #eeeff2;
+  --grabber: #818181;
+
+  /* типографика */
+  --font-family: 'Alfa Interface';
+
+  --ls-regular-14: -0.08px;
+  --ls-regular-15: -0.15px;
+  --ls-regular-16: -0.24px;
+  --ls-regular-17: -0.35px;
+  --ls-semibold-15: 0.24px;
+  --ls-semibold-22: -0.15px;
+  --ls-bold-12: 0.57px;
+}

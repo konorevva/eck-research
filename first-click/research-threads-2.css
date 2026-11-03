@@ -1,0 +1,16 @@
+/* Only the Threads 2 entries load this stylesheet. Upper MVP geometry is unchanged. */
+:root[data-research-variant] #seg .hub-connection-title { display:none; }
+:root[data-research-variant] #seg .seg-track { display:flex; }
+:root[data-research-variant] #seg { padding:16px 20px 0!important; }
+:root[data-research-variant] #seg .research-overview { cursor:default; pointer-events:none; user-select:none; }
+:root[data-research-variant] .research-connection .communication-actions { display:grid!important; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; padding:12px 20px 28px; overflow:visible; }
+:root[data-research-variant] .research-connection .communication-action { width:auto; min-width:0; }
+:root[data-research-variant] .research-connection .communication-tile { width:48px; height:48px; border-radius:16px; }
+:root[data-research-variant] .research-requests > .content-title { margin:0; padding:0 20px 16px; }
+:root[data-research-variant] .research-requests .chat-row-text { min-width:0; }
+:root[data-research-variant] .research-requests :is(.chat-row-title,.chat-row-sub) { display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+:root[data-research-variant] .research-requests { padding-bottom:32px; }
+
+/* Override shared request-row selectors with directory IDs in their :is() list. */
+:root[data-research-variant] #listInner .research-requests .chat-row-tile { display:none; }
+:root[data-research-variant] #listInner .research-requests .chat-row-text { padding-left:0; }
