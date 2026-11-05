@@ -46,7 +46,15 @@ html,body { width:100%; height:100%; background:#fff; overscroll-behavior:none; 
 :root[data-research] .entry-point { container-type:inline-size; }
 :root[data-research] .hub-dashboard-role { top:13.486cqw; left:19.338cqw; }
 :root[data-research] .hub-dashboard-actions { top:5.089cqw; height:16.794cqw; }
-:root[data-research] .entry-search { top:25.191cqw; }
+/* Match the input rectangle baked into the responsive dashboard artwork.
+   Keep all four edges in the same coordinate system to avoid a second rim. */
+:root[data-research] .entry-search {
+ top:25.191cqw;
+ left:5.089cqw;
+ width:89.822cqw;
+ height:13.232cqw;
+ border-radius:8.142cqw;
+}
 :root[data-research] .event-strip-clip { width:calc(100% + 20px); }
 :root[data-research] .greeting { width:calc(100% - 48px); }
 :root[data-research] .scrim { width:100%; }
