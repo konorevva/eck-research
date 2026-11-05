@@ -307,7 +307,7 @@
       if(history && !button.closest('.hub-more-items')) {
         button.classList.toggle('hub-has-unread', unread > 0);
         button.dataset.unreadCount = String(unread);
-        button.setAttribute('aria-label',(!window.SpotlightHubConfiguration.state.requestsOnly?'Обзор':window.SpotlightHubConfiguration.state.preset==='mvp'?'Все запросы':'Все диалоги')+(unread?', есть новые дайджесты':''));
+        button.setAttribute('aria-label',(!window.SpotlightHubConfiguration.state.requestsOnly?'Обзор':window.SpotlightHubConfiguration.state.preset==='mvp'?(window.SpotlightResearch?.variant?.historyLabel ? 'Все диалоги' : 'Все запросы'):'Все диалоги')+(unread?', есть новые дайджесты':''));
       }
     });
   }

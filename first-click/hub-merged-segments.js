@@ -35,7 +35,7 @@
     }
     return requestRows() || '<p class="hub-merged-empty">Здесь появятся ваши диалоги</p>';
   }
-  const labels = {get requests(){return config().preset==='mvp'?'Запросы':'Диалоги';},insights:'Инсайты',tasks:'Задачи'};
+  const labels = {get requests(){return config().preset==='mvp'?(window.SpotlightResearch?.variant?.historyLabel || 'Запросы'):'Диалоги';},insights:'Инсайты',tasks:'Задачи'};
   function previewPane(key) {
     const body=document.createElement('div');body.innerHTML=pane(key);
     body.querySelectorAll('.content-title').forEach(node=>node.remove());
@@ -72,7 +72,7 @@
   }
   function inlineRequests() {
     seed();
-    return '<section class="hub-mvp-requests research-requests"><h2 class="content-title"><button type="button" class="hub-overview-section-link" data-research-open-requests>Запросы<span aria-hidden="true" class="hub-overview-chevron"></span></button></h2><div data-content-surface="research">'+pane('requests')+'</div></section>';
+    return '<section class="hub-mvp-requests research-requests"><h2 class="content-title"><button type="button" class="hub-overview-section-link" data-research-open-requests>'+labels.requests+'<span aria-hidden="true" class="hub-overview-chevron"></span></button></h2><div data-content-surface="research">'+pane('requests')+'</div></section>';
   }
   function refresh() {
     document.querySelectorAll('[data-content-surface]').forEach(shell=>{

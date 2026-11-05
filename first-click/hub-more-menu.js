@@ -74,7 +74,7 @@
     var current = context();
     content.querySelector('[data-request-action="history"] img').src = window.SpotlightHubConfiguration.historyIcon;
     content.setAttribute('aria-label', window.SpotlightHubConfiguration.state.preset === 'mvp' ? 'Действия с запросом' : 'Действия с диалогом');
-    content.querySelector('[data-request-action="history"] span').textContent = !window.SpotlightHubConfiguration.state.requestsOnly ? 'Обзор' : window.SpotlightHubConfiguration.state.preset === 'mvp' ? 'Запросы' : 'Диалоги';
+    content.querySelector('[data-request-action="history"] span').textContent = !window.SpotlightHubConfiguration.state.requestsOnly ? 'Обзор' : window.SpotlightHubConfiguration.state.preset === 'mvp' ? (window.SpotlightResearch?.variant?.historyLabel || 'Запросы') : 'Диалоги';
     content.querySelector('[data-request-action="new"] span').textContent = window.SpotlightHubConfiguration.state.preset === 'mvp' ? 'Новый диалог' : 'Новый диалог';
     var regular = current === 'thread' && app.isRegularRequest();
     var run=content.querySelector('[data-request-action="run"]');

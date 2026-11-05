@@ -36,8 +36,8 @@
     root.dataset.unifiedTabbar = String(state.unifiedTabbar);
     const entry = document.querySelector('#entrySpotlight');
     if (entry) {
-      entry.setAttribute('aria-label', state.unifiedTabbar ? 'Открыть связь' : 'Открыть АИ');
-      entry.lastChild.textContent = state.unifiedTabbar ? 'Связь' : 'АИ';
+      entry.setAttribute('aria-label', variant?.entryLabel ? 'Открыть ' + variant.entryLabel : state.unifiedTabbar ? 'Открыть связь' : 'Открыть АИ');
+      entry.lastChild.textContent = variant?.entryLabel || (state.unifiedTabbar ? 'Связь' : 'АИ');
     }
     root.dataset.connectionDisplay = state.connectionDisplay;
   }
@@ -120,9 +120,9 @@
       // A click anywhere on the card opens its thread; outside clicks only dismiss it.
     }, {capture:true});
     const entry = document.querySelector('#entrySpotlight');
-    entry.setAttribute('aria-label', state.unifiedTabbar ? 'Открыть связь' : 'Открыть АИ');
+    entry.setAttribute('aria-label', variant?.entryLabel ? 'Открыть ' + variant.entryLabel : state.unifiedTabbar ? 'Открыть связь' : 'Открыть АИ');
     // Keep the existing button/listener. The split orb uses the original local asset.
-    entry.lastChild.textContent = state.unifiedTabbar ? 'Связь' : 'АИ';
+    entry.lastChild.textContent = variant?.entryLabel || (state.unifiedTabbar ? 'Связь' : 'АИ');
     window.addEventListener('message', event => {
       if (variant) return;
       if (event.source !== parent || event.origin !== location.origin || event.data?.type !== 'spotlight-hub:configuration') return;
